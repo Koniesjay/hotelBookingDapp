@@ -2,13 +2,19 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import {
+  ThirdwebProvider,
+  coinbaseWallet,
+  metamaskWallet,
+  walletConnect,
+} from "@thirdweb-dev/react";
 import "./styles/globals.css";
+// import { mumbai } from "@thirdweb-dev/chains";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "ethereum";
+const activeChain = "mumbai";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -16,6 +22,13 @@ root.render(
   <React.StrictMode>
     <ThirdwebProvider
       activeChain={activeChain}
+      supportedWallets={[
+        metamaskWallet({
+          recommended: true,
+        }),
+        // coinbaseWallet(),
+        // walletConnect(),
+      ]}
       clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
     >
       <App />

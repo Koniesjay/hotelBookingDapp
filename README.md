@@ -1,56 +1,29 @@
-# CRA JavaScript Starter
+# Hotel Booking
 
-Starter kit to build with Create React App and thirdweb without additional initial configuration.
+This decentralized application, named HotelBooking, facilitates booking and cancellation of rooms in a hotel. It allows users to book available rooms by sending the required payment in Ether and provides functionality for canceling bookings and withdrawing funds by the owner.
 
-## Installation
+# Features
 
-Install the template with [thirdweb create](https://portal.thirdweb.com/cli/create)
+- `Booking Rooms`: Users can book available rooms by specifying the room number and sending the required payment in Ether.
+  Cancellation of Bookings: The contract owner or the contract itself can cancel bookings made by users.
 
-```bash
- npx thirdweb create --template cra-javascript-starter
-```
+- `Funds Withdrawal`: The contract owner can withdraw the accumulated funds from the contract.
+  View Available Rooms: Users can view the list of available rooms at any time.
 
-## Run Locally
+- `View Contract Balance`: Users can check the current balance of the contract.
 
-Install dependencies
+# Contract Structure
 
-```bash
-yarn
-```
-
-Start the server
-
-```bash
-yarn start
-```
-
-## Environment Variables
-
-To run this project, you will need to add the `CLIENT_ID` variables to your .env file.
-
-You can generate your `clientId` and `secretKey` via thirdweb's [dashboard](https://thirdweb.com/create-api-key).
-
-## Deployment
-
-Deploy a copy of your application to IPFS using the following command:
-
-```bash
-yarn deploy
-```
-
-## Additional Resources
-
-- [Documentation](https://portal.thirdweb.com)
-- [Templates](https://thirdweb.com/templates)
-- [Video Tutorials](https://youtube.com/thirdweb_)
-- [Blog](https://blog.thirdweb.com)
-
-## Contributing
-
-Contributions and [feedback](https://feedback.thirdweb.com) are always welcome!
-
-Please visit our [open source page](https://thirdweb.com/open-source) for more information.
-
-## Need help?
-
-For help, join the [discord](https://discord.gg/thirdweb) or visit our [support page](https://support.thirdweb.com).
+- `owner`: Address of the contract owner.
+- `bookedRooms`: Mapping to track the booking status of rooms for each customer.
+- `availableRooms`: Mapping to track the availability status of rooms.
+- `numRooms`: Constant representing the total number of rooms available.
+- `roomPrice`: Constant representing the price of booking a room. -`RoomBooked event`: Event emitted when a room is successfully booked.
+- `Custom errors`: invalidRoom and insufficientFunds are custom errors for handling invalid room numbers and insufficient funds, respectively.
+  Functions
+- `bookRoom(uint roomNumber, address customer)`: Allows users to book a room by specifying the room number and sending the required payment.
+- `cancelBooking(uint roomNumber, address customer)`: Allows the contract owner or the contract itself to cancel bookings made by users.
+- `withdrawFunds()`: Allows the contract owner to withdraw accumulated funds from the contract.
+- `getAvailableRooms()`: Retrieves the list of currently available rooms.
+- `getBalance()`: Retrieves the current balance of the contract.
+  Fallback function: Allows the contract to receive Ether.
